@@ -23,7 +23,7 @@ public class LoginSteps {
      * @param user el usuario
      */
     public void typeUser(String user){
-        WebElement userInputElement = driver.findElement(LoginPage.userInput);
+        WebElement userInputElement = driver.findElement(LoginPage.emailInput);
         userInputElement.sendKeys(user);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(444));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
