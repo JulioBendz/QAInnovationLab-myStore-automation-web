@@ -22,7 +22,9 @@ public class LoginSteps {
 
     // Método para iniciar sesión con usuario y contraseña
     public void login(String user, String password) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+
+        // Ingresa las credenciales
         driver.findElement(LoginPage.userInput).sendKeys(user);
         driver.findElement(LoginPage.passInput).sendKeys(password);
         driver.findElement(LoginPage.loginButton).click();
@@ -36,6 +38,9 @@ public class LoginSteps {
         } catch (org.openqa.selenium.TimeoutException e) {
             // No hay mensaje de error, lo cual significa que el inicio de sesión fue exitoso
             System.out.println("Inicio de sesión exitoso.");
+
+            // Espera hasta que un elemento clave de la página de destino esté visible
+            wait.until(ExpectedConditions.visibilityOfElementLocated(LoginPage.dashboardTitle));
         }
     }
 }

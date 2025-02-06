@@ -18,14 +18,14 @@ public class CategorySteps {
 
     // Método para navegar a una categoría específica
     public void navigateToCategory(String category) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         WebElement categoryElement = wait.until(ExpectedConditions.elementToBeClickable(CategoryPage.categoryClothes));
         categoryElement.click();
     }
 
     // Método para navegar a una subcategoría específica
     public void navigateToSubCategory(String subCategory) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         WebElement subCategoryElement = wait.until(ExpectedConditions.elementToBeClickable(CategoryPage.subcategoryMen));
         subCategoryElement.click();
     }

@@ -47,6 +47,11 @@ public class StoreStepsDef {
         categorySteps.validateCartPopup();
     }
 
+    @Entonces("valido en el popup que el monto total sea calculado correctamente")
+    public void valido_en_el_popup_que_el_monto_total_sea_calculado_correctamente() {
+        categorySteps.validateCartPopup();
+    }
+
     @Cuando("finalizo la compra")
     public void finalizo_la_compra() {
         driver.findElement(CategoryPage.finalizePurchaseButton).click();
@@ -55,6 +60,11 @@ public class StoreStepsDef {
     @Entonces("valido el título de la página del carrito")
     public void valido_el_título_de_la_página_del_carrito() {
         cartSteps = new CartSteps(driver);
-        cartSteps.validateCartPage();
+        cartSteps.validateCartTitle();
+    }
+    @Entonces("vuelvo a validar el cálculo de precios en el carrito")
+    public void vuelvo_a_validar_el_cálculo_de_precios_en_el_carrito() {
+        cartSteps = new CartSteps(driver);
+        cartSteps.validatePriceCalculation();
     }
 }

@@ -16,5 +16,5 @@ Feature: Product - Store
     Examples:
       | usuario              | clave          | categoria | subcategoria  | resultado_esperado |
       | juliobendz13@gmail.com | Julio13jabg6* | Clothes   | Men          | éxito             |
-#     | invalid_user          | invalid_pass  | Clothes   | Men           | falla             |
-#      | juliobendz13@gmail.com | Julio13jabg6* | Autos     | SUV         | falla             |
+      | invalid_user          | invalid_pass  | Clothes   | Men           | falla             |
+      | juliobendz13@gmail.com | Julio13jabg6* | Autos     | SUV         | falla             |
