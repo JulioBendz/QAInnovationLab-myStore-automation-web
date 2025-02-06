@@ -1,6 +1,7 @@
 package com.nttdata.steps;
 
 import com.nttdata.page.LoginPage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -42,5 +43,11 @@ public class LoginSteps {
             // Espera hasta que un elemento clave de la página de destino esté visible
             wait.until(ExpectedConditions.visibilityOfElementLocated(LoginPage.dashboardTitle));
         }
+    }
+
+    // Método para esperar a que la página cargue completamente
+    private void waitForPageToLoad() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
 }

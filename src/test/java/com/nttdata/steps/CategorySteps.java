@@ -2,6 +2,7 @@ package com.nttdata.steps;
 
 import com.nttdata.page.CategoryPage;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,8 +20,23 @@ public class CategorySteps {
     // Método para navegar a una categoría específica
     public void navigateToCategory(String category) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-        WebElement categoryElement = wait.until(ExpectedConditions.elementToBeClickable(CategoryPage.categoryClothes));
-        categoryElement.click();
+
+        try {
+            // Construye el localizador dinámicamente basado en el nombre de la categoría
+            By categoryLocator = CategoryPage.getCategoryLocator(category);
+
+            // Espera hasta que la categoría sea clickeable y haz clic
+            WebElement categoryElement = wait.until(ExpectedConditions.elementToBeClickable(categoryLocator));
+            categoryElement.click();
+
+            System.out.println("Navegación a la categoría '" + category + "' exitosa.");
+        } catch (org.openqa.selenium.TimeoutException e) {
+            // Si no se encuentra la categoría, lanza una excepción con un mensaje claro
+            throw new RuntimeException("Error: La categoría '" + category + "' no existe o no es accesible.", e);
+        } catch (Exception e) {
+            // Captura otros errores inesperados
+            throw new RuntimeException("Error inesperado al navegar a la categoría '" + category + "'.", e);
+        }
     }
 
     // Método para navegar a una subcategoría específica

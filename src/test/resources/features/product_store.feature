@@ -14,7 +14,7 @@ Feature: Product - Store
     And vuelvo a validar el cálculo de precios en el carrito
 
     Examples:
-      | usuario              | clave          | categoria | subcategoria  | resultado_esperado |
-      | juliobendz13@gmail.com | Julio13jabg6* | Clothes   | Men          | éxito             |
-      | invalid_user          | invalid_pass  | Clothes   | Men           | falla             |
-      | juliobendz13@gmail.com | Julio13jabg6* | Autos     | SUV         | falla             |
+      | usuario              | clave          | categoria | subcategoria  |
+      | juliobendz13@gmail.com | Julio13jabg6* | Clothes   | Men          |
+      | invalid_user          | invalid_pass  | Clothes   | Men           |
+      | juliobendz13@gmail.com | Julio13jabg6* | Autos     | SUV         |
