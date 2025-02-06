@@ -8,43 +8,34 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-
 public class LoginSteps {
-
     private WebDriver driver;
 
-    //constructor
-    public LoginSteps(WebDriver driver){
+    public LoginSteps(WebDriver driver) {
         this.driver = driver;
     }
 
-    /**
-     * Escribir el usuario
-     * @param user el usuario
-     */
-    public void typeUser(String user){
-        WebElement userInputElement = driver.findElement(LoginPage.emailInput);
-        userInputElement.sendKeys(user);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(444));
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(LoginPage.loginButton));
-
-
+    // Método para navegar a la página de inicio de sesión
+    public void navigateToLoginPage() {
+        driver.findElement(LoginPage.iniciarSesionLink).click();
     }
 
-    /**
-     * Escribir el password
-     * @param password el password del usuario
-     */
-    public void typePassword(String password){
-        this.driver.findElement(LoginPage.passInput).sendKeys(password);
-    }
+    // Método para iniciar sesión con usuario y contraseña
+    public void login(String user, String password) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.findElement(LoginPage.userInput).sendKeys(user);
+        driver.findElement(LoginPage.passInput).sendKeys(password);
+        driver.findElement(LoginPage.loginButton).click();
 
-    /**
-     * Hacer click en el botón login
-     */
-    public void login(){
-        this.driver.findElement(LoginPage.loginButton).click();
+        // Verifica si hay un mensaje de error
+        try {
+            WebElement errorMessage = wait.until(ExpectedConditions.presenceOfElementLocated(LoginPage.errorMessage));
+            if (errorMessage.isDisplayed()) {
+                throw new RuntimeException("Error de autenticación: " + errorMessage.getText());
+            }
+        } catch (org.openqa.selenium.TimeoutException e) {
+            // No hay mensaje de error, lo cual significa que el inicio de sesión fue exitoso
+            System.out.println("Inicio de sesión exitoso.");
+        }
     }
-
 }
